@@ -6,7 +6,6 @@
         "packages/*"
     ],
     "scripts": {
-        "format": "prettier --config .prettierrc '**/*.{js,css,ts,tsx,json}' --write",
         "dev:frontend": "bun --cwd packages/frontend dev",
         "dev:backend": "bun --cwd packages/backend dev",
         "dev": "concurrently -n 'backend,frontend' -c 'red,blue' 'bun dev:backend' 'bun dev:frontend'",
@@ -18,11 +17,19 @@
         "start": "bun packages/backend/dist/index.js",
         "build-start": "bun run build && bun start",
         "env:push": "bun dotenv-vault push",
-        "env:pull": "bun dotenv-vault pull"
+        "env:pull": "bun dotenv-vault pull",
+        "prepare": "husky install"
+    },
+    "lint-staged": {
+        "**/*.{js,ts,tsx,json,css}": [
+            "prettier --write"
+        ]
     },
     "devDependencies": {
         "concurrently": "^8.2.2",
         "dotenv-vault": "^1.26.0",
+        "husky": "^8.0.0",
+        "lint-staged": "^15.2.2",
         "prettier": "^3.2.5",
         "prettier-plugin-tailwindcss": "^0.5.11"
     }
