@@ -8,7 +8,7 @@
     "scripts": {
         "dev:frontend": "bun --cwd packages/frontend dev",
         "dev:backend": "bun --cwd packages/backend dev",
-        "dev": "concurrently --kill-others -n 'backend,frontend' -c 'red,blue' 'bun dev:backend' 'bun dev:frontend'",
+        "dev": "concurrently -n 'backend,frontend' -c 'red,blue' 'bun dev:backend' 'bun dev:frontend'",
         "build:backend": "bun --cwd packages/backend build:prod",
         "build:backend:dev": "bun --cwd packages/backend build:dev",
         "build:frontend": "bun --cwd packages/frontend build:prod",

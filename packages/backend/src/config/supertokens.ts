@@ -2,6 +2,7 @@ import supertokens from "supertokens-node"
 import Session from "supertokens-node/recipe/session"
 import ThirdPartyPasswordless from "supertokens-node/recipe/thirdpartypasswordless"
 import { Env } from "@/config/env"
+import Dashboard from "supertokens-node/recipe/dashboard"
 
 supertokens.init({
     framework: "express",
@@ -48,6 +49,7 @@ supertokens.init({
                 }
             ]
         }),
-        Session.init()
+        Session.init(),
+        Dashboard.init()
     ]
 })
