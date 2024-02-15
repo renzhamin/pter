@@ -3,7 +3,7 @@ import { useEffect } from "react"
 
 export default function Home() {
     useEffect(() => {
-        axiosClient.get("/userid").then((res) => {
+        axiosClient.get("/user/id").then((res) => {
             // accessing protected routes
             console.log("response data", res.data)
         })

@@ -1,54 +1,31 @@
-import { Env } from "@/config/env"
-import "@/config/supertokens"
-import cors from "cors"
 import "dotenv/config"
-import express, { Response } from "express"
-import supertokens from "supertokens-node"
+import "@/config/supertokens"
+import { corsConfig } from "@/config/cors"
+import cors from "cors"
+import express from "express"
 import {
-    SessionRequest,
     errorHandler as supertokensErrorHandler,
     middleware as supertokensMiddleware
 } from "supertokens-node/framework/express"
-import { verifySession } from "supertokens-node/recipe/session/framework/express"
-import { getDirname } from "./utils/dir"
-import path from "path"
+import { router } from "@/routes"
+import { frontendFilesRouter } from "@/routes/frontend-files"
 
 const app = express()
 
 const inDev = process.env.NODE_ENV === "development"
 
-const corsOptions: cors.CorsOptions = {
-    origin: Env.frontendUrl,
-    allowedHeaders: ["content-type", ...supertokens.getAllCORSHeaders()],
-    credentials: true
-}
-
 if (inDev) {
-    app.use(cors(corsOptions))
+    app.use(cors(corsConfig))
 }
 
 app.use(supertokensMiddleware())
 
-app.get("/api/health", (_, res) => {
-    return res.status(200).send("Health Ok")
-})
-
-app.get(
-    "/api/userid",
-    verifySession(),
-    async (req: SessionRequest, res: Response) => {
-        const userId = req.session?.getUserId() as string
-        return res.status(200).json({ userId })
-    }
-)
+app.use("/api", router)
 
 app.use(supertokensErrorHandler())
 
-if (inDev && process.env.SERVE_STATIC_FILES === "true") {
-    app.use(express.static(path.join(getDirname(), "../../frontend/dist")))
-    app.get("*", (_, res) => {
-        res.sendFile(path.join(getDirname(), "../../frontend/dist/index.html"))
-    })
+if (process.env.SERVE_FRONTEND_FILES === "true") {
+    app.use(frontendFilesRouter)
 }
 
 export default app
