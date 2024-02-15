@@ -15,9 +15,12 @@
         "build:dev": "bun build:backend:dev && bun build:frontend",
         "build:prod": "bun build:backend && bun build:frontend",
         "start": "bun packages/backend/dist/index.js",
-        "build-start": "bun run build && bun start"
+        "build-start": "bun run build && bun start",
+        "env:push": "bun dotenv-vault push",
+        "env:pull": "bun dotenv-vault pull"
     },
     "devDependencies": {
-        "concurrently": "^8.2.2"
+        "concurrently": "^8.2.2",
+        "dotenv-vault": "^1.26.0"
     }
 }
