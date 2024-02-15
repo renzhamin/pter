@@ -1,0 +1,22 @@
+{
+    "name": "backend",
+    "private": true,
+    "main": "src/index.ts",
+    "type": "module",
+    "scripts": {
+        "dev": "bun --watch run ./src/index.ts",
+        "build": "bun build --target=node --outdir=dist src/index.ts",
+        "ci:build": "bun build --target=node --outdir=dist src/app.ts"
+    },
+    "dependencies": {
+        "@types/cors": "^2.8.17",
+        "@types/express": "^4.17.21",
+        "@types/node": "^20.11.17",
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.3",
+        "express": "^4.18.2",
+        "supertokens-node": "^16.7.1",
+        "typescript": "^5.3.3",
+        "zod": "^3.22.4"
+    }
+}

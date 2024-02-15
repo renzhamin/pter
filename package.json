@@ -1,0 +1,17 @@
+{
+    "name": "pter",
+    "version": "1.0.0",
+    "type": "module",
+    "workspaces": [
+        "packages/*"
+    ],
+    "scripts": {
+        "build-backend": "bun --cwd packages/backend ci:build",
+        "build-backend-dev": "bun --cwd packages/backend build",
+        "build-frontend": "bun --cwd packages/frontend ci:build",
+        "build": "bun build-backend-dev && bun build-frontend",
+        "ci:build": "bun build-backend && bun build-frontend",
+        "start": "bun packages/backend/dist/index.js",
+        "build-start": "bun run build && bun start"
+    }
+}
