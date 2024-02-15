@@ -5,8 +5,8 @@
     "type": "module",
     "scripts": {
         "dev": "bun --watch run ./src/index.ts",
-        "build": "bun build --target=node --outdir=dist src/index.ts",
-        "ci:build": "bun build --target=node --outdir=dist src/app.ts"
+        "build:dev": "bun build --target=node --outdir=dist src/index.ts",
+        "build:prod": "bun build --target=node --outdir=dist src/app.ts"
     },
     "dependencies": {
         "@types/cors": "^2.8.17",

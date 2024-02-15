@@ -6,12 +6,18 @@
         "packages/*"
     ],
     "scripts": {
-        "build-backend": "bun --cwd packages/backend ci:build",
-        "build-backend-dev": "bun --cwd packages/backend build",
-        "build-frontend": "bun --cwd packages/frontend ci:build",
-        "build": "bun build-backend-dev && bun build-frontend",
-        "ci:build": "bun build-backend && bun build-frontend",
+        "dev:frontend": "bun --cwd packages/frontend dev",
+        "dev:backend": "bun --cwd packages/backend dev",
+        "dev": "concurrently -n 'backend,frontend' -c 'red,blue' 'bun dev:backend' 'bun dev:frontend'",
+        "build:backend": "bun --cwd packages/backend build:prod",
+        "build:backend:dev": "bun --cwd packages/backend build:dev",
+        "build:frontend": "bun --cwd packages/frontend build:prod",
+        "build:dev": "bun build:backend:dev && bun build:frontend",
+        "build:prod": "bun build:backend && bun build:frontend",
         "start": "bun packages/backend/dist/index.js",
         "build-start": "bun run build && bun start"
+    },
+    "devDependencies": {
+        "concurrently": "^8.2.2"
     }
 }
