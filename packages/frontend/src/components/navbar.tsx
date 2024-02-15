@@ -9,9 +9,9 @@ export const NavBar = () => {
     const isSignedIn = !session.loading && session.doesSessionExist
 
     return (
-        <div className="w-full h-16 bg-accent flex items-center gap-4 p-4">
+        <div className="bg-accent flex h-16 w-full items-center gap-4 p-4">
             <Link to="/">IUT</Link>
-            <div className="ml-auto flex-center gap-4">
+            <div className="flex-center ml-auto gap-4">
                 <ThemeToggle />
                 <AuthButton isSignedIn={isSignedIn} />
             </div>

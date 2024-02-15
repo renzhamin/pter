@@ -10,5 +10,5 @@ SuperTokens.init(supertokensConfig)
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
         <App />
-    </React.StrictMode>,
+    </React.StrictMode>
 )

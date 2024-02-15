@@ -7,7 +7,7 @@ import supertokens from "supertokens-node"
 import {
     SessionRequest,
     errorHandler as supertokensErrorHandler,
-    middleware as supertokensMiddleware,
+    middleware as supertokensMiddleware
 } from "supertokens-node/framework/express"
 import { verifySession } from "supertokens-node/recipe/session/framework/express"
 import { getDirname } from "./utils/dir"
@@ -20,7 +20,7 @@ const inDev = process.env.NODE_ENV === "development"
 const corsOptions: cors.CorsOptions = {
     origin: Env.frontendUrl,
     allowedHeaders: ["content-type", ...supertokens.getAllCORSHeaders()],
-    credentials: true,
+    credentials: true
 }
 
 if (inDev) {
@@ -39,7 +39,7 @@ app.get(
     async (req: SessionRequest, res: Response) => {
         const userId = req.session?.getUserId() as string
         return res.status(200).json({ userId })
-    },
+    }
 )
 
 app.use(supertokensErrorHandler())

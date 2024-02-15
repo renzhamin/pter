@@ -13,7 +13,7 @@ export const RouteComponent = () => {
         <Suspense fallback={<div>Loading...</div>}>
             <Routes>
                 {getSuperTokensRoutesForReactRouterDom(reactRouterDom, [
-                    ThirdPartyPasswordlessPreBuiltUI,
+                    ThirdPartyPasswordlessPreBuiltUI
                 ])}
 
                 {/* Public Routes */}

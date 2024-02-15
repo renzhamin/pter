@@ -8,7 +8,7 @@ supertokens.init({
     supertokens: {
         // These are the connection details of the app you created on supertokens.com
         connectionURI: Env.supertokens.uri,
-        apiKey: Env.supertokens.key,
+        apiKey: Env.supertokens.key
     },
     appInfo: {
         // learn more about this on https://supertokens.com/docs/session/appinfo
@@ -16,7 +16,7 @@ supertokens.init({
         apiDomain: Env.backendUrl,
         websiteDomain: Env.frontendUrl,
         apiBasePath: "/api/auth",
-        websiteBasePath: "/auth",
+        websiteBasePath: "/auth"
     },
     recipeList: [
         ThirdPartyPasswordless.init({
@@ -29,10 +29,10 @@ supertokens.init({
                         clients: [
                             {
                                 clientId: Env.google.clientId,
-                                clientSecret: Env.google.clientSecret,
-                            },
-                        ],
-                    },
+                                clientSecret: Env.google.clientSecret
+                            }
+                        ]
+                    }
                 },
                 {
                     config: {
@@ -41,13 +41,13 @@ supertokens.init({
                             {
                                 clientId: "6cf2ed227435f9ab2cae",
                                 clientSecret:
-                                    "9216d3c33802790afbc9539f1c85e2243533e3d2",
-                            },
-                        ],
-                    },
-                },
-            ],
+                                    "9216d3c33802790afbc9539f1c85e2243533e3d2"
+                            }
+                        ]
+                    }
+                }
+            ]
         }),
-        Session.init(),
-    ],
+        Session.init()
+    ]
 })

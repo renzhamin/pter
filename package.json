@@ -6,6 +6,7 @@
         "packages/*"
     ],
     "scripts": {
+        "format": "prettier --config .prettierrc '**/*.{js,css,ts,tsx,json}' --write",
         "dev:frontend": "bun --cwd packages/frontend dev",
         "dev:backend": "bun --cwd packages/backend dev",
         "dev": "concurrently -n 'backend,frontend' -c 'red,blue' 'bun dev:backend' 'bun dev:frontend'",
@@ -21,6 +22,8 @@
     },
     "devDependencies": {
         "concurrently": "^8.2.2",
-        "dotenv-vault": "^1.26.0"
+        "dotenv-vault": "^1.26.0",
+        "prettier": "^3.2.5",
+        "prettier-plugin-tailwindcss": "^0.5.11"
     }
 }

@@ -10,7 +10,7 @@ export const supertokensConfig: SuperTokensConfig = {
         apiDomain: Env.backendUrl + "/api",
         websiteDomain: Env.domain,
         apiBasePath: "/api/auth",
-        websiteBasePath: "/auth",
+        websiteBasePath: "/auth"
     },
     recipeList: [
         ThirdPartyPasswordless.init({
@@ -19,10 +19,10 @@ export const supertokensConfig: SuperTokensConfig = {
             signInUpFeature: {
                 providers: [
                     ThirdPartyPasswordless.Google.init(),
-                    ThirdPartyPasswordless.Github.init(),
-                ],
-            },
+                    ThirdPartyPasswordless.Github.init()
+                ]
+            }
         }),
-        Session.init(),
-    ],
+        Session.init()
+    ]
 }

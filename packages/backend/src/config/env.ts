@@ -6,16 +6,16 @@ const envSchema = z.object({
     supertokens: z.object({
         appName: z.string(),
         uri: z.string().url(),
-        key: z.string(),
+        key: z.string()
     }),
     google: z.object({
         clientId: z.string(),
-        clientSecret: z.string(),
+        clientSecret: z.string()
     }),
     github: z.object({
         clientId: z.string(),
-        clientSecret: z.string(),
-    }),
+        clientSecret: z.string()
+    })
 })
 
 const env = {
@@ -24,16 +24,16 @@ const env = {
     supertokens: {
         appName: process.env.SUPERTOKENS_APP_NAME,
         uri: process.env.SUPERTOKENS_URI,
-        key: process.env.SUPERTOKENS_KEY,
+        key: process.env.SUPERTOKENS_KEY
     },
     google: {
         clientId: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET
     },
     github: {
         clientId: process.env.GITHUB_CLIENT_ID,
-        clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    },
+        clientSecret: process.env.GITHUB_CLIENT_SECRET
+    }
 }
 
 export const Env = envSchema.parse(env)
