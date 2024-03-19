@@ -1,8 +1,9 @@
 import supertokens from "supertokens-node"
 import Session from "supertokens-node/recipe/session"
-import ThirdPartyPasswordless from "supertokens-node/recipe/thirdpartypasswordless"
+import ThirdParty from "supertokens-node/recipe/thirdparty"
 import { Env } from "@/config/env"
 import Dashboard from "supertokens-node/recipe/dashboard"
+import UserMetadata from "supertokens-node/recipe/usermetadata"
 
 supertokens.init({
     framework: "express",
@@ -20,34 +21,60 @@ supertokens.init({
         websiteBasePath: "/auth"
     },
     recipeList: [
-        ThirdPartyPasswordless.init({
-            flowType: "MAGIC_LINK",
-            contactMethod: "EMAIL",
-            providers: [
-                {
-                    config: {
-                        thirdPartyId: "google",
-                        clients: [
-                            {
-                                clientId: Env.google.clientId,
-                                clientSecret: Env.google.clientSecret
+        UserMetadata.init(),
+        ThirdParty.init({
+            override: {
+                functions: (originalImplementation) => {
+                    return {
+                        ...originalImplementation,
+                        // override the thirdparty sign in / up API
+
+                        signInUp: async function (input) {
+                            let response =
+                                await originalImplementation.signInUp(input)
+
+                            if (response.status === "OK") {
+                                let name =
+                                    response.rawUserInfoFromProvider
+                                        .fromUserInfoAPI!["given_name"]
+
+                                let studentId =
+                                    response.rawUserInfoFromProvider
+                                        .fromUserInfoAPI!["family_name"]
+
+                                const userId = response.user.id
+
+                                // TODO: Save name and studentId in database
+                                await UserMetadata.updateUserMetadata(userId, {
+                                    name,
+                                    studentId
+                                })
                             }
-                        ]
-                    }
-                },
-                {
-                    config: {
-                        thirdPartyId: "github",
-                        clients: [
-                            {
-                                clientId: "6cf2ed227435f9ab2cae",
-                                clientSecret:
-                                    "9216d3c33802790afbc9539f1c85e2243533e3d2"
-                            }
-                        ]
+
+                            return response
+                        }
                     }
                 }
-            ]
+            },
+            signInAndUpFeature: {
+                providers: [
+                    {
+                        config: {
+                            thirdPartyId: "google",
+                            clients: [
+                                {
+                                    clientId: Env.google.clientId,
+                                    clientSecret: Env.google.clientSecret,
+                                    scope: [
+                                        "https://www.googleapis.com/auth/userinfo.email",
+                                        "https://www.googleapis.com/auth/userinfo.profile"
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
         }),
         Session.init(),
         Dashboard.init()

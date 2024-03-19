@@ -1,7 +1,8 @@
 import React, { Suspense } from "react"
 import { Routes, Route } from "react-router-dom"
 import * as reactRouterDom from "react-router-dom"
-import { ThirdPartyPasswordlessPreBuiltUI } from "supertokens-auth-react/recipe/thirdpartypasswordless/prebuiltui"
+import { ThirdPartyPreBuiltUI } from "supertokens-auth-react/recipe/thirdparty/prebuiltui"
+
 import { getSuperTokensRoutesForReactRouterDom } from "supertokens-auth-react/ui"
 import { PrivateRoute } from "./privateRoute"
 
@@ -13,7 +14,7 @@ export const RouteComponent = () => {
         <Suspense fallback={<div>Loading...</div>}>
             <Routes>
                 {getSuperTokensRoutesForReactRouterDom(reactRouterDom, [
-                    ThirdPartyPasswordlessPreBuiltUI
+                    ThirdPartyPreBuiltUI
                 ])}
 
                 {/* Public Routes */}

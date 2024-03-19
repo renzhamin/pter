@@ -1,8 +1,9 @@
 import Session from "supertokens-auth-react/recipe/session"
-import ThirdPartyPasswordless from "supertokens-auth-react/recipe/thirdpartypasswordless"
+import ThirdParty, { Google } from "supertokens-auth-react/recipe/thirdparty"
+
 import supertokensCSS from "@/css/supertokens.css?inline"
-import { Env } from "./env"
 import { SuperTokensConfig } from "supertokens-auth-react/lib/build/types"
+import { Env } from "./env"
 
 export const supertokensConfig: SuperTokensConfig = {
     appInfo: {
@@ -13,14 +14,10 @@ export const supertokensConfig: SuperTokensConfig = {
         websiteBasePath: "/auth"
     },
     recipeList: [
-        ThirdPartyPasswordless.init({
+        ThirdParty.init({
             style: supertokensCSS,
-            contactMethod: "EMAIL",
-            signInUpFeature: {
-                providers: [
-                    ThirdPartyPasswordless.Google.init(),
-                    ThirdPartyPasswordless.Github.init()
-                ]
+            signInAndUpFeature: {
+                providers: [Google.init()]
             }
         }),
         Session.init()
