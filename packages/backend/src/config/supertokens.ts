@@ -30,15 +30,24 @@ supertokens.init({
                         // override the thirdparty sign in / up API
 
                         signInUp: async function (input) {
+                            const domain = input.email.split("@").pop()
+
+                            if (domain !== "iut-dhaka.edu") {
+                                return {
+                                    status: "SIGN_IN_UP_NOT_ALLOWED",
+                                    reason: "Not IUT mail"
+                                }
+                            }
+
                             let response =
                                 await originalImplementation.signInUp(input)
 
                             if (response.status === "OK") {
-                                let name =
+                                const name =
                                     response.rawUserInfoFromProvider
                                         .fromUserInfoAPI!["given_name"]
 
-                                let studentId =
+                                const studentId =
                                     response.rawUserInfoFromProvider
                                         .fromUserInfoAPI!["family_name"]
 

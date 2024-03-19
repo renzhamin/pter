@@ -13,4 +13,8 @@
     [data-supertokens="superTokensBranding"] {
         display: none;
     }
+
+    [data-supertokens="generalError"] {
+        color: black;
+    }
 }

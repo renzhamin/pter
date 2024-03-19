@@ -12,8 +12,6 @@ export default function Home() {
     const [userData, setUserData] = useState<UserData | null>(null)
     useEffect(() => {
         axiosClient.get("/user/data").then((res) => {
-            // accessing protected routes
-            console.log("response data", res.data)
             setUserData(res.data)
         })
     }, [])
